@@ -1,3 +1,7 @@
+const inputPelicula = document.getElementById('peliculaIn');
+const botonBuscar = document.getElementById('buscarBtn');
+const divResultado = document.getElementById('resultado');
+
 botonBuscar.addEventListener('click', async function() {
     const titulo = inputPelicula.value;
     const miClave = 'cc7c8129'; 
