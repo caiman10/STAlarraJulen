@@ -12,12 +12,12 @@ botonBuscar.addEventListener('click', async function() {
         const datos = await respuesta.json();
 
         if (datos.Response === "True") {
-            divresultado.innerHTML = `
+            resultado.innerHTML = `
                 <p><strong>Director:</strong> ${datos.Director}</p>
                 <p><strong>Año:</strong> ${datos.Year}</p>
             `;
         } else {
-            divResultado.innerHTML = `<p>No se ha encontrado la película.</p>`;
+            resultado.innerHTML = `<p>No se ha encontrado la película.</p>`;
         }
 
     } catch (error) {
