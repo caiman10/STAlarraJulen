@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 
     // 3. Si SÍ escribieron un nombre, filtramos o buscamos como antes
     const peliculaEncontrada = database.peliculas.find(
-        (item) => item.Title.toLowerCase() === nombreBuscado.toLowerCase()
+        (item) => item.nombre.toLowerCase() === nombreBuscado.toLowerCase()
     );
 
     // 4. Si no existe, devolvemos un 404
