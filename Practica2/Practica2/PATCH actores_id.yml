@@ -1,0 +1,18 @@
+info:
+  name: PATCH actores_id
+  type: http
+
+http:
+  method: PATCH
+  url: http://localhost:3000/actores/:id
+  params:
+    - name: id
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

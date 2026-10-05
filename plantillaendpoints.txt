@@ -1,0 +1,27 @@
+JSON + EXPRESS
+
+BUSCAR
+
+GET /peliculas
+GET /peliculas/id
+
+GET /actores
+GET /actores/id
+
+CREAR
+
+POST /peliculas
+POST /actores
+
+BORRAR
+
+DELETE /peliculas/id
+DELETE /actores/id
+
+MODIFICAR
+
+PATCH /peliculas/id
+PATCH /actores/id
+
+
+
