@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
     const nombreBuscado = req.query.nombre;
 
     // 2. Si NO ponen nada (es decir, viene vacío o undefined), devolvemos TODAS las películas
-    if (trim.(nombreBuscado)) {
+    if (!nombreBuscado) {
         return res.json(database.peliculas);
     }
 
