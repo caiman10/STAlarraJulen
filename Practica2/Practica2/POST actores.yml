@@ -6,6 +6,13 @@ info:
 http:
   method: POST
   url: http://localhost:3000/actores
+  body:
+    type: json
+    data: |-
+      {
+        "nombre_completo":"Tomas Tarragon",
+        "año_nacimiento":"1996"
+      }
   auth: inherit
 
 settings:

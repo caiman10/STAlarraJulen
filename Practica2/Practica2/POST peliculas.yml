@@ -1,10 +1,19 @@
 info:
   name: POST peliculas
   type: http
+  seq: 1
 
 http:
   method: POST
   url: http://localhost:3000/peliculas
+  body:
+    type: json
+    data: |-
+      {
+        "nombre":"Judiadassssss",
+        "año_publicacion":"192213",
+        "actores":""
+      }
   auth: inherit
 
 settings:

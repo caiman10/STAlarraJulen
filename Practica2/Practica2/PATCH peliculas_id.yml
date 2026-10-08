@@ -1,14 +1,24 @@
 info:
   name: PATCH peliculas_id
   type: http
+  seq: 1
 
 http:
   method: PATCH
   url: http://localhost:3000/peliculas/:id
   params:
     - name: id
-      value: ""
+      value: "1"
       type: path
+  body:
+    type: json
+    data: |-
+      {
+        "nombre": "Nuevo Título de la Película",
+        "año_publicacion": "2026",
+        "addActores": "Leonardo DiCaprio",
+        "removeActores": "Actor Antiguo"
+      }
   auth: inherit
 
 settings:
