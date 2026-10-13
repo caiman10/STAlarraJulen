@@ -1,0 +1,75 @@
+.contenedor-principal {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.Category {
+  margin-bottom: 2rem;
+}
+
+.Category h2 {
+  margin-bottom: 1rem;
+}
+
+.lista-peliculas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.Movie {
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 1rem;
+  width: 220px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.Movie h3 {
+  margin: 0 0 0.5rem;
+}
+
+.Movie p {
+  margin: 0.25rem 0;
+}
+
+.buscador {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.buscador input {
+  width: min(420px, 70vw);
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.buscador button,
+.informacion button {
+  border: none;
+  border-radius: 8px;
+  background: #1f2937;
+  color: white;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+.informacion {
+  margin-top: 1rem;
+}
+
+.informacion p {
+  margin-top: 0.75rem;
+  color: #374151;
+}

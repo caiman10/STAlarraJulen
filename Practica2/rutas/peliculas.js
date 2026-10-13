@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req,res) => {
-	const {nombre,año_publicacion,actores} = req.body;
+	const {nombre,año_publicacion,actores,categoria} = req.body;
 
 
 	if (!nombre) {
@@ -48,7 +48,8 @@ router.post("/", (req,res) => {
         id: nuevoId,
         nombre: nombre,
         año_publicacion: año_publicacion || "Desconocido",
-        actores: actores || "Desconocido"
+        actores: actores || "Desconocido",
+        categoria: categoria || "Desconocida"
     };
 
 	// 5. La añadimos a nuestra "base de datos" simulada
@@ -93,8 +94,12 @@ router.patch("/:id", (req, res) => {
     if (req.body.año_publicacion) {
         peli.Year = req.body.Year;
     }
+    // 3. Cambiar categoria
+    if (req.body.categoria) {
+        peli.categoria = req.body.categoria;
+    }
 
-    // 3. Añadir actor (suponiendo que guardas un array de actores en la película, ej: peli.actores = [])
+    // 4. Añadir actor (suponiendo que guardas un array de actores en la película, ej: peli.actores = [])
     if (req.body.addActores) {
         if (!peli.actores) peli.actores = [];
         // Evitamos duplicados si ya existe

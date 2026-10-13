@@ -3,12 +3,21 @@
     {
       "id": 1,
       "nombre": "Interstellar",
+      "categoria": "Ciencia Ficcion",
       "año_publicacion": 2014,
       "actores": [1,2]
     },
     {
       "id": 2,
       "nombre": "Pulp Fiction",
+      "categoria": "Ciencia Ficcion",
+      "año_publicacion": 1994,
+      "actores": [3,4]
+    },
+    {
+      "id": 3,
+      "nombre": "Shrek",
+      "categoria": "Animacion",
       "año_publicacion": 1994,
       "actores": [3,4]
     }
