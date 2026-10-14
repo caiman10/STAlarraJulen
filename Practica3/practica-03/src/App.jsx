@@ -16,7 +16,7 @@ const peliculasPorCategoria = pelisData.peliculas.reduce((acc, pelicula) => {
   acc[categoria].push({
     ...pelicula,
     actores: (pelicula.actores ?? [])
-      .map((id) => actoresPorId[id]?.nombre)
+      .map((id) => actoresPorId[id]?.nombre_completo)
       .filter(Boolean),
   });
 
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="contenedor-principal">
       <h1>Mi app de cine</h1>
-      <Buscador />
+      <br></br>
 
       {Object.entries(peliculasPorCategoria).map(([categoria, peliculas]) => (
         <section key={categoria} className="Category">
