@@ -18,9 +18,24 @@
       "id": 3,
       "nombre": "Shrek",
       "categoria": "Animacion",
-      "año_publicacion": 1994,
+      "año_publicacion": 2003,
+      "actores": []
+    },  
+    {
+      "id": 4,
+      "nombre": "Toy Story",
+      "categoria": "Animacion",
+      "año_publicacion": 2005,
+      "actores": []
+    },
+    {
+      "id": 4,
+      "nombre": "Resacon en las vegas",
+      "categoria": "Comedia",
+      "año_publicacion": 2012,
       "actores": []
     }
+
   ],
   "actores": [
     {

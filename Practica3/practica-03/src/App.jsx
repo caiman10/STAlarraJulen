@@ -1,5 +1,4 @@
 import './App.css';
-import { Buscador } from './components/Buscador';
 import { Movie } from './components/Movie';
 import pelisData from './data/pelis.json';
 const actoresPorId = Object.fromEntries(
@@ -7,7 +6,7 @@ const actoresPorId = Object.fromEntries(
 );
 
 const peliculasPorCategoria = pelisData.peliculas.reduce((acc, pelicula) => {
-  const categoria = pelicula.categoria || pelicula.genero;
+  const categoria = pelicula.categoria;
 
   if (!acc[categoria]) {
     acc[categoria] = [];
@@ -27,7 +26,6 @@ function App() {
   return (
     <div className="contenedor-principal">
       <h1>Mi app de cine</h1>
-      <br></br>
 
       {Object.entries(peliculasPorCategoria).map(([categoria, peliculas]) => (
         <section key={categoria} className="Category">

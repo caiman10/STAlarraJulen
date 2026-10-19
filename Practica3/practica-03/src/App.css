@@ -1,11 +1,19 @@
 .contenedor-principal {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 3rem;
+  box-sizing: border-box;
+  width: min(100% - 2rem, 700px);
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border: 1px solid #333;
+  background: #666;
+  color: #f2f2f2;
 }
 
-h1 {
-  margin-bottom: 1.5rem;
+.contenedor-principal h1 {
+  margin: 0 0 3rem;
+  color: inherit;
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0;
   text-align: center;
 }
 
@@ -13,63 +21,91 @@ h1 {
   margin-bottom: 2rem;
 }
 
+.Category:last-child {
+  margin-bottom: 0;
+}
+
 .Category h2 {
-  margin-bottom: 1rem;
+  margin: 0 0 0.5rem 0.5rem;
+  color: inherit;
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .lista-peliculas {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 0.75rem;
+  border: 1px solid #222;
+  background: #aaa;
+  scrollbar-width: none;
+}
+
+.lista-peliculas::-webkit-scrollbar {
+  display: none;
 }
 
 .Movie {
-  background: #f5f5f5;
-  border-radius: 12px;
-  padding: 1rem;
-  width: 220px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 147px;
+  min-height: 87px;
+  flex-direction: column;
+  padding: 0.5rem;
+  border: 1px solid #222;
+  background: #e36565;
+  color: #090909;
   text-align: left;
 }
 
 .Movie h3 {
-  margin: 0 0 0.5rem;
-}
-
-.Movie p {
-  margin: 0.25rem 0;
-}
-
-.buscador {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.buscador input {
-  width: min(420px, 70vw);
-  padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-.buscador button,
-.informacion button {
-  border: none;
-  border-radius: 8px;
-  background: #1f2937;
-  color: white;
-  padding: 0.75rem 1rem;
-  cursor: pointer;
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25;
 }
 
 .informacion {
-  margin-top: 1rem;
+  align-self: flex-end;
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.informacion button {
+  min-width: 86px;
+  min-height: 31px;
+  padding: 0.35rem;
+  border: 1px solid #111;
+  border-radius: 0;
+  background: #df0000;
+  color: #080808;
+  font: inherit;
+  font-size: 0.5625rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.informacion button:hover {
+  background: #c90000;
+}
+
+.informacion button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
 }
 
 .informacion p {
-  margin-top: 0.75rem;
-  color: #374151;
+  margin: 0.5rem 0 0;
+  color: #111;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .contenedor-principal {
+    width: calc(100% - 1rem);
+    margin: 1rem auto;
+    padding: 1rem;
+  }
 }
