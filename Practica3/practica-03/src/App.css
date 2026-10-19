@@ -1,6 +1,7 @@
 .contenedor-principal {
   box-sizing: border-box;
-  width: min(100% - 2rem, 700px);
+  width: 100%;
+  min-height:100vh;
   margin: 3rem auto;
   padding: 1.5rem;
   border: 1px solid #333;
@@ -102,10 +103,4 @@
   font-size: 0.75rem;
 }
 
-@media (max-width: 480px) {
-  .contenedor-principal {
-    width: calc(100% - 1rem);
-    margin: 1rem auto;
-    padding: 1rem;
-  }
-}
+
