@@ -1,6 +1,5 @@
 import { Informacion } from './Informacion';
 
-
 export function Movie({ pelicula }) {
   const textoActores=pelicula.actores.join(", ")
   return (  
