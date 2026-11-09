@@ -7,6 +7,8 @@ function App() {
   const [peliculas, setPeliculas] = useState([]);
   const [actores, setActores] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [categoriaSel, setCategoriaSel] = useState('');
+  const [categoriasAbiertas, setCategoriasAbiertas] = useState(false);
 
   useEffect(() => {
     // Usamos Promise.all para pedir ambas rutas a la vez a tu backend
@@ -42,12 +44,13 @@ function App() {
       ...pelicula,
       // Traducimos los IDs de actores [1, 2] a nombres ["Matthew...", "Anne..."]
       actores: (pelicula.actores || [])
-        .map((id) => (actoresPorId[id] ? actoresPorId[id].nombre_completo || actoresPorId[id].name : "Desconocido"))
-        .filter(Boolean),
+      .map((id) => (actoresPorId[id] ? actoresPorId[id].nombre_completo || "Desconocido" : "Desconocido"))
+      .filter(Boolean),
     });
 
     return acc;
   }, {});
+  const categorias = Object.keys(peliculasPorCategoria);
 
   if (cargando) {
     return <div className="contenedor-principal"><p>Cargando datos del servidor...</p></div>;
@@ -56,19 +59,46 @@ function App() {
   return (
     <div className="contenedor-principal">
       <h1 className="titulo-principal">Mi app de cine</h1>
+      <div className="selector-categoria">
+        <button
+          className="boton-categoria"
+          type="button"
+          aria-expanded={categoriasAbiertas}
+          onClick={() => setCategoriasAbiertas((abiertas) => !abiertas)}
+        >
+          Categoría: {categoriaSel || 'Seleccionar'}
+        </button>
+        {categoriasAbiertas && (
+          <div className="opciones-categoria" id="opciones-categoria" >
+            {categorias.map((categoria) => (
+              <button
+                key={categoria}
+                className="opcion-categoria"
+                type="button"
+                aria-pressed={categoriaSel === categoria}
+                onClick={() => {
+                  setCategoriaSel(categoria);
+                  setCategoriasAbiertas(false);
+                }}
+              >
+                {categoria}
+              </button>
+            ))}
+            {categorias.length === 0 && <p>No hay categorías disponibles.</p>}
+          </div>
+        )}
+      </div>
 
-      {Object.entries(peliculasPorCategoria).map(([categoria, pelis]) => (
-        <section key={categoria} className="categoria-seccion">
-          <h2 className="categoria-titulo">Categoría: {categoria}</h2>
-          <div className="caja-categoria">
-            <div className="lista-peliculas">
-              {pelis.map((pelicula) => (
-                <Movie key={pelicula.id} pelicula={pelicula} />
-              ))}
-            </div>
+      {categoriaSel && peliculasPorCategoria[categoriaSel] && (
+        <section className="categoria-seccion">
+          <h2 className="categoria-titulo">{categoriaSel}</h2>
+          <div className="lista-peliculas">
+            {peliculasPorCategoria[categoriaSel].map((pelicula) => (
+              <Movie key={pelicula.id} pelicula={pelicula} />
+            ))}
           </div>
         </section>
-      ))}
+      )}
     </div>
   );
 }
