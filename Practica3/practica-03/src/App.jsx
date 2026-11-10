@@ -2,13 +2,13 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { Movie } from './components/Movie';
+import { SelectorCategorias } from './components/SelectorCategorias';
 
 function App() {
   const [peliculas, setPeliculas] = useState([]);
   const [actores, setActores] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [categoriaSel, setCategoriaSel] = useState('');
-  const [categoriasAbiertas, setCategoriasAbiertas] = useState(false);
 
   useEffect(() => {
     // Usamos Promise.all para pedir ambas rutas a la vez a tu backend
@@ -59,35 +59,11 @@ function App() {
   return (
     <div className="contenedor-principal">
       <h1 className="titulo-principal">Mi app de cine</h1>
-      <div className="selector-categoria">
-        <button
-          className="boton-categoria"
-          type="button"
-          aria-expanded={categoriasAbiertas}
-          onClick={() => setCategoriasAbiertas((abiertas) => !abiertas)}
-        >
-          Categoría: {categoriaSel || 'Seleccionar'}
-        </button>
-        {categoriasAbiertas && (
-          <div className="opciones-categoria" id="opciones-categoria" >
-            {categorias.map((categoria) => (
-              <button
-                key={categoria}
-                className="opcion-categoria"
-                type="button"
-                aria-pressed={categoriaSel === categoria}
-                onClick={() => {
-                  setCategoriaSel(categoria);
-                  setCategoriasAbiertas(false);
-                }}
-              >
-                {categoria}
-              </button>
-            ))}
-            {categorias.length === 0 && <p>No hay categorías disponibles.</p>}
-          </div>
-        )}
-      </div>
+      <SelectorCategorias
+        categorias={categorias}
+        categoriaSeleccionada={categoriaSel}
+        onCategoriaChange={setCategoriaSel}
+      />
 
       {categoriaSel && peliculasPorCategoria[categoriaSel] && (
         <section className="categoria-seccion">
