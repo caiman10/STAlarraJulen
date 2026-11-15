@@ -14,6 +14,14 @@ router.get("/:id", (req,res) => {
 router.get("/", (req, res) => {
     // 1. Capturamos el valor del query parameter 'nombre'
     const nombreBuscado = req.query.nombre;
+    const categoriaBuscada = req.query.categoria;
+
+    // Si piden una categoría concreta, devolvemos solo las películas de esa categoría
+    if (categoriaBuscada) {
+        return res.json(database.peliculas.filter(
+            (item) => item.categoria && item.categoria.toLowerCase() === categoriaBuscada.toLowerCase()
+        ));
+    }
 
     // 2. Si NO ponen nada (es decir, viene vacío o undefined), devolvemos TODAS las películas
     if (!nombreBuscado) {
