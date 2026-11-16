@@ -1,0 +1,165 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111;
+  background: #fff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+
+.contenedor-principal {
+  box-sizing: border-box;
+  width: 100%;
+  min-height:100vh;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border: 1px solid #333;
+  background: #666;
+  color: #f2f2f2;
+}
+
+.contenedor-principal h1 {
+  margin: 0 0 3rem;
+  color: inherit;
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.selector-categoria {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0 auto 2rem;
+}
+
+.selector-categoria select {
+  min-width: 12rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #222;
+  background: #e36565;
+  color: #090909;
+  font: inherit;
+  cursor: pointer;
+}
+
+.selector-categoria select:hover {
+  background: #d34f4f;
+}
+
+.selector-categoria select:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.categoria-seccion {
+  margin-bottom: 2rem;
+}
+
+.categoria-titulo {
+  margin: 0 0 0.5rem 0.5rem;
+  color: inherit;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.Category {
+  margin-bottom: 2rem;
+}
+
+.Category:last-child {
+  margin-bottom: 0;
+}
+
+.Category h2 {
+  margin: 0 0 0.5rem 0.5rem;
+  color: inherit;
+  font-size: 1.125rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.lista-peliculas {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 0.75rem;
+  border: 1px solid #222;
+  background: #aaa;
+  scrollbar-width: none;
+}
+
+.lista-peliculas::-webkit-scrollbar {
+  display: none;
+}
+
+.Movie {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 0 147px;
+  min-height: 87px;
+  flex-direction: column;
+  padding: 0.5rem;
+  border: 1px solid #222;
+  background: #e36565;
+  color: #090909;
+  text-align: left;
+}
+
+.Movie h3 {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.informacion {
+  align-self: flex-end;
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.informacion button {
+  min-width: 86px;
+  min-height: 31px;
+  padding: 0.35rem;
+  border: 1px solid #111;
+  border-radius: 0;
+  background: #df0000;
+  color: #080808;
+  font: inherit;
+  font-size: 0.5625rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.informacion button:hover {
+  background: #c90000;
+}
+
+.informacion button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.informacion p {
+  margin: 0.5rem 0 0;
+  color: #111;
+  font-size: 0.75rem;
+}
