@@ -4,75 +4,79 @@ import './App.css';
 import { Movie } from './components/Movie';
 import { SelectorCategorias } from './components/SelectorCategorias';
 
-function App() {
-  const [peliculas, setPeliculas] = useState([]);
-  const [actores, setActores] = useState([]);
-  const [cargando, setCargando] = useState(true);
-  const [categoriaSel, setCategoriaSel] = useState('');
+const API_URL = 'http://localhost:3000';
 
+function App() {
+  const [categoriaSel, setCategoriaSel] = useState('');
+  const [actores, setActores] = useState([]);
+  // Guardamos las películas junto con la categoría a la que pertenecen,
+  // para saber si lo que tenemos ya corresponde a la categoría elegida
+  const [resultado, setResultado] = useState({ categoria: '', peliculas: [] });
+
+  // 1. Al arrancar: pedimos los actores una sola vez ([] = solo al montar)
   useEffect(() => {
-    // Usamos Promise.all para pedir ambas rutas a la vez a tu backend
-    Promise.all([
-      fetch('http://localhost:3000/peliculas').then((res) => res.json()),
-      fetch('http://localhost:3000/actores').then((res) => res.json())
-    ])
-      .then(([dataPeliculas, dataActores]) => {
-        setPeliculas(dataPeliculas); // Guarda el array de /peliculas
-        setActores(dataActores);     // Guarda el array de /actores
-        setCargando(false);
-      })
-      .catch((err) => {
-        console.error("Error al conectar con la API:", err);
-        setCargando(false);
-      });
+    fetch(`${API_URL}/actores`)
+      .then((res) => res.json())
+      .then((data) => setActores(data))
+      .catch((err) => console.error('Error al cargar los actores:', err));
   }, []);
 
-  // 1. Diccionario rápido para buscar actores por su ID
-  const actoresPorId = Object.fromEntries(
-    actores.map((actor) => [actor.id, actor])
-  );
+  // 2. DINÁMICO: este efecto se vuelve a ejecutar cada vez que cambia categoriaSel
+  //    y pide a la API solo las películas de esa categoría
+  useEffect(() => {
+    if (!categoriaSel) return; // sin categoría elegida no pedimos nada
 
-  // 2. Agrupamos películas por categoría y reemplazamos los IDs de actores por sus nombres reales
-  const peliculasPorCategoria = peliculas.reduce((acc, pelicula) => {
-    const categoria = pelicula.categoria || "Sin categoría";
+    let cancelado = false; // por si el usuario cambia de categoría antes de que llegue la respuesta
 
-    if (!acc[categoria]) {
-      acc[categoria] = [];
-    }
+    fetch(`${API_URL}/peliculas?categoria=${encodeURIComponent(categoriaSel)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!cancelado) setResultado({ categoria: categoriaSel, peliculas: data });
+      })
+      .catch((err) => console.error('Error al cargar las películas:', err));
 
-    acc[categoria].push({
-      ...pelicula,
-      // Traducimos los IDs de actores [1, 2] a nombres ["Matthew...", "Anne..."]
-      actores: (pelicula.actores || [])
-      .map((id) => (actoresPorId[id] ? actoresPorId[id].nombre_completo || "Desconocido" : "Desconocido"))
-      .filter(Boolean),
-    });
+    // Limpieza: se ejecuta antes del siguiente efecto; ignoramos la respuesta antigua
+    return () => {
+      cancelado = true;
+    };
+  }, [categoriaSel]);
 
-    return acc;
-  }, {});
-  const categorias = Object.keys(peliculasPorCategoria);
+  // Las películas que tenemos son de una categoría anterior -> todavía cargando
+  const cargando = categoriaSel !== '' && resultado.categoria !== categoriaSel;
 
-  if (cargando) {
-    return <div className="contenedor-principal"><p>Cargando datos del servidor...</p></div>;
-  }
+  // Diccionario rápido para buscar actores por su ID
+  const actoresPorId = Object.fromEntries(actores.map((actor) => [actor.id, actor]));
+
+  // Reemplazamos los IDs de actores por sus nombres
+  const peliculas = resultado.peliculas.map((pelicula) => ({
+    ...pelicula,
+    actores: (pelicula.actores || []).map(
+      (id) => actoresPorId[id]?.nombre_completo || 'Desconocido'
+    ),
+  }));
 
   return (
     <div className="contenedor-principal">
       <h1 className="titulo-principal">Mi app de cine</h1>
       <SelectorCategorias
-        categorias={categorias}
         categoriaSeleccionada={categoriaSel}
         onCategoriaChange={setCategoriaSel}
       />
 
-      {categoriaSel && peliculasPorCategoria[categoriaSel] && (
+      {categoriaSel && (
         <section className="categoria-seccion">
           <h2 className="categoria-titulo">{categoriaSel}</h2>
-          <div className="lista-peliculas">
-            {peliculasPorCategoria[categoriaSel].map((pelicula) => (
-              <Movie key={pelicula.id} pelicula={pelicula} />
-            ))}
-          </div>
+          {cargando ? (
+            <p>Cargando películas...</p>
+          ) : peliculas.length === 0 ? (
+            <p>No hay películas en esta categoría.</p>
+          ) : (
+            <div className="lista-peliculas">
+              {peliculas.map((pelicula) => (
+                <Movie key={pelicula.id} pelicula={pelicula} />
+              ))}
+            </div>
+          )}
         </section>
       )}
     </div>
